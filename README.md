@@ -1,1 +1,2 @@
 # Draughts
+for ai builers
