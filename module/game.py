@@ -43,17 +43,55 @@ class Game:
             self.Board.movement(self.select_piece , row ,col)
             skipped = self.avalible_move[(row,col)]
             if color == self.turn:
-                if skipped:
-                    self.Board.remove(skipped)
-                self.change_turn ()       
-                    
+                    while True:
+                        if skipped:
+                            self.Board.remove(skipped)
+                            piece = self.Board.get_piece(row, col)
+                            nextmove = self.Board.get_avalible_move(piece)
+                            multi_jump_check = list(nextmove.values())
+                            if multi_jump_check:
+                                if len(multi_jump_check) == 1:
+                                    if multi_jump_check[0] == [(0, 0, 0)]:
+                                        skipped = []
+                                        if skipped:
+                                            self.Board.remove(skipped)
+                                    else:
+                                        self.turn = WHITE if self.turn == BLACK else BLACK
+                                        self.select_piece = (row, col)
+                                        self.avalible_move = nextmove
+                                elif len(multi_jump_check) == BLACK:
+                                    if multi_jump_check[0] != [[]]:
+                                        self.turn = WHITE if self.turn == BLACK else BLACK
+                                        self.select_piece = (row, col)
+                                        self.avalible_move = nextmove
+                                    elif multi_jump_check[1] != [[]]:
+                                        self.turn = WHITE if self.turn == BLACK else BLACK
+                                        self.select_piece = (row, col)
+                                        self.avalible_move = nextmove
+                                    else:
+                                        self.turn = WHITE if self.turn == BLACK else BLACK
+                                        self.avalible_move = {}
+                                        break
+                                else:
+                                    self.turn = WHITE if self.turn == BLACK else BLACK
+                                    self.avalible_move = {}
+                                    break
+                            else:
+                                self.turn = WHITE if self.turn == BLACK else BLACK
+                                self.avalible_move = {}
+                                break
+                        else:
+                            self.turn = WHITE if self.turn == BLACK else BLACK
+                            self.avalible_move = {}
+                            break
+
         else:           
             return False
         
         return True
 
+
     def change_turn(self):
-        self.avalible_move = {}
         if self.turn == WHITE:
             self.turn = BLACK
         else:
