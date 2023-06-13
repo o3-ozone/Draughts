@@ -1,6 +1,6 @@
 import pygame
 from .const import BLACK,WHITE,SQUARESIZE,RADI,CROWN
-class piece:
+class Piece:
     
     def __init__(self,row,col,colors) :
         self.row = row
@@ -28,7 +28,5 @@ class piece:
         self.col = col
         self.calculation_pos()
     
-    def colorss(self):
-        return self.colors
     def __repr__(self):
         return str(self.colors)

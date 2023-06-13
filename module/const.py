@@ -14,4 +14,6 @@ LIGHTBROWN = (229, 170, 112)
 GREY =(128,128,128)
 DRAW = (123,123,123)
 
-CROWN = pygame.image.load('draughts_AI/asset/king.png')
+MIDV1WINB = 40
+MIDV1DRAWB = 5
+CROWN = pygame.image.load('D:/E-AI-M.6/draughts_AI/asset/king.png')
